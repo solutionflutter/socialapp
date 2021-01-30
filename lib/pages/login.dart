@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:social_app/pages/registration.dart';
 import 'package:social_app/widgets/variables.dart';
 
 class LoginPage extends StatefulWidget {
@@ -86,7 +87,17 @@ class _LoginPageState extends State<LoginPage> {
               children: [
                 Text('Don,t Have an Account',style: myStyle(16),),
                 SizedBox(width: 10,),
-                Text('Register',style: myStyle(16,Colors.black),)
+                InkWell(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(
+                        builder: (context)=>RegistrationPage()
+                    ));
+                  },
+                  child:
+                    Text(
+                      'Register',style: myStyle(16,Colors.black),
+                    ),
+                ),
               ],
             ),
           ],
