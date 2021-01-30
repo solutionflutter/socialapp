@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:social_app/pages/login.dart';
@@ -9,6 +11,29 @@ class RegistrationPage extends StatefulWidget {
 }
 
 class _RegistrationPageState extends State<RegistrationPage> {
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  registerUser()
+  {
+    FirebaseAuth.instance.createUserWithEmailAndPassword(
+      email: emailController.text.trim(),
+      password: passwordController.text.trim(),
+    ).then((signedUser){
+      userCollection.doc(signedUser.user.uid).set({
+        'username':usernameController.text.trim(),
+        'email':emailController.text.trim(),
+        'password':passwordController.text.trim(),
+        'uId' : signedUser.user.uid,
+        'profilePic' : 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FUser_(computing)&psig=AOvVaw2kQUdMrQxjoawy8qyF0WBq&ust=1612098605810000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCLCOnrjdw-4CFQAAAAAdAAAAABAD',
+      });
+    });
+    Navigator.push(context, MaterialPageRoute(
+      builder: (context)=>LoginPage()
+    ));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,6 +68,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
               width: MediaQuery.of(context).size.width,
               margin: EdgeInsets.only(left: 20,right: 20),
               child: TextField(
+                controller: usernameController,
                 decoration: InputDecoration(
                   fillColor: Colors.white,
                   filled: true,
@@ -68,6 +94,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
               width: MediaQuery.of(context).size.width,
               margin: EdgeInsets.only(left: 20,right: 20),
               child: TextField(
+                controller: emailController,
                 decoration: InputDecoration(
                   fillColor: Colors.white,
                   filled: true,
@@ -93,6 +120,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
               width: MediaQuery.of(context).size.width,
               margin: EdgeInsets.only(left: 20,right: 20),
               child: TextField(
+                controller: passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
                   fillColor: Colors.white,
@@ -115,17 +143,24 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
 
             //Starting of register button
-            Container(
-              width: MediaQuery.of(context).size.width/1.5,
-              height: 50,
-              decoration: BoxDecoration(
-                color: Colors.grey,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Center(
-                child: Text('Register',style: myStyle(20,Colors.white,FontWeight.w600),),
+
+            InkWell(
+              onTap: (){
+                registerUser();
+              },
+              child: Container(
+                width: MediaQuery.of(context).size.width/1.5,
+                height: 50,
+                decoration: BoxDecoration(
+                  color: Colors.grey,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Center(
+                  child: Text('Register',style: myStyle(20,Colors.white,FontWeight.w600),),
+                ),
               ),
             ),
+
             //Ending of the register button
 
 
@@ -142,6 +177,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 SizedBox(width: 10,),
                 InkWell(
                   onTap: (){
+
                     Navigator.push(context, MaterialPageRoute(
                         builder: (context)=>LoginPage()
                     ));
