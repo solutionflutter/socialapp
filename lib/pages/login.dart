@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:social_app/pages/registration.dart';
 import 'package:social_app/widgets/variables.dart';
@@ -8,6 +9,21 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  loginUser(){
+    try{
+      FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+    }catch(e){
+      SnackBar snackBar = SnackBar(content : Text('Email or Passowrd is invalid',style: myStyle(20,Colors.redAccent,FontWeight.bold)));
+      Scaffold.of(context).showSnackBar(snackBar);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,6 +49,7 @@ class _LoginPageState extends State<LoginPage> {
               width: MediaQuery.of(context).size.width,
               margin: EdgeInsets.only(left: 20,right: 20),
               child: TextField(
+                controller: emailController,
                 decoration: InputDecoration(
                   fillColor: Colors.white,
                   filled: true,
@@ -52,6 +69,7 @@ class _LoginPageState extends State<LoginPage> {
               width: MediaQuery.of(context).size.width,
               margin: EdgeInsets.only(left: 20,right: 20),
               child: TextField(
+                controller: passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
                   fillColor: Colors.white,
@@ -68,17 +86,24 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(
               height: 10,
             ),
-            Container(
-              width: MediaQuery.of(context).size.width / 1.5,
-              height: 50,
-              decoration: BoxDecoration(
-                color: Colors.black,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Center(
-                child: Text('login',style: myStyle(20,Colors.white,FontWeight.w600),),
+
+            InkWell(
+              onTap: (){
+                loginUser();
+              },
+              child: Container(
+                width:  MediaQuery.of(context).size.width/1.5,
+                height: 50,
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Center(
+                  child: Text('login',style: myStyle(20,Colors.white,FontWeight.w600),),
+                ),
               ),
             ),
+
             SizedBox(
               height: 10,
             ),
