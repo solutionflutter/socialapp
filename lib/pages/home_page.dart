@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:social_app/tabs/add_video.dart';
+import 'package:social_app/tabs/messages_page.dart';
+import 'package:social_app/tabs/profile_page.dart';
+import 'package:social_app/tabs/search_page.dart';
+import 'package:social_app/tabs/video_page.dart';
 import 'package:social_app/widgets/variables.dart';
 
 class HomePage extends StatefulWidget {
@@ -8,6 +13,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int page = 0;
+  List pageOptions = [
+    VideoPage(),
+    SearchPage(),
+    AddVideoPage(),
+    MessagesPage(),
+    ProfilePage(),
+  ];
+
   customIcon(){
     return Container(
         width: 45,
@@ -49,8 +62,14 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
+      body: pageOptions[page],
       bottomNavigationBar: BottomNavigationBar(
+        currentIndex: page,
+        onTap: (index){
+          setState(() {
+            page =index;
+          });
+        },
         selectedItemColor: Colors.lightBlue,
         unselectedItemColor: Colors.black,
         type: BottomNavigationBarType.fixed,
