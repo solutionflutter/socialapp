@@ -72,7 +72,6 @@ class _HomePageState extends State<HomePage> {
         },
         selectedItemColor: Colors.lightBlue,
         unselectedItemColor: Colors.black,
-        type: BottomNavigationBarType.fixed,
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home,size: 25),

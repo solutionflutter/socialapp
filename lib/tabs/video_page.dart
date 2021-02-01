@@ -8,12 +8,14 @@ class VideoPage extends StatefulWidget {
 }
 
 class _VideoPageState extends State<VideoPage> {
+  //build profile
   buildProfile(){
     return Container(
       width: 60,
       height: 60,
       child: Stack(
         children: [
+          // Profile Image Insert
           Positioned(
             left: 5,
             child: Container(
@@ -25,11 +27,25 @@ class _VideoPageState extends State<VideoPage> {
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(25),
-                child: Image(
-                  image: NetworkImage('https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FUser_(computing)&psig=AOvVaw2kQUdMrQxjoawy8qyF0WBq&ust=1612098605810000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCLCOnrjdw-4CFQAAAAAdAAAAABAD'),
+                child: Image.network(
+                  'https://www.searchpng.com/wp-content/uploads/2019/02/Men-Profile-Image-715x657.png',
                   fit: BoxFit.cover,
-                ),
+                )
               ),
+            ),
+          ),
+          // Add icon insert
+          Positioned(
+            left: 22,
+            bottom: 0,
+            child: Container(
+              width: 20,
+              height: 20,
+              decoration: BoxDecoration(
+                color: Colors.pinkAccent,
+                borderRadius: BorderRadius.circular(25),
+              ),
+              child: Icon(Icons.add, color: Colors.white, size: 15,),
             ),
           )
         ],
@@ -101,6 +117,27 @@ class _VideoPageState extends State<VideoPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           buildProfile(),
+                          Column(
+                            children: [
+                              Icon(Icons.favorite,color: Colors.white, size: 40,),
+                              SizedBox(height: 5,),
+                              Text('10',style: myStyle(20,Colors.white),)
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              Icon(Icons.comment,color: Colors.white, size: 40,),
+                              SizedBox(height: 5,),
+                              Text('5',style: myStyle(20,Colors.white),)
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              Icon(Icons.replay,color: Colors.white, size: 40,),
+                              SizedBox(height: 5,),
+                              Text('5',style: myStyle(20,Colors.white),)
+                            ],
+                          ),
                         ],
                       ),
                     ),

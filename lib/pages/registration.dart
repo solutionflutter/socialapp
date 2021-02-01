@@ -26,7 +26,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
         'email':emailController.text.trim(),
         'password':passwordController.text.trim(),
         'uId' : signedUser.user.uid,
-        'profilePic' : 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FUser_(computing)&psig=AOvVaw2kQUdMrQxjoawy8qyF0WBq&ust=1612098605810000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCLCOnrjdw-4CFQAAAAAdAAAAABAD',
+        'profilePic' : 'https://www.searchpng.com/wp-content/uploads/2019/02/Men-Profile-Image-715x657.png',
       });
     });
     Navigator.push(context, MaterialPageRoute(
